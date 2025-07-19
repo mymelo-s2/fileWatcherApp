@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStringListModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +18,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onFileDetected(const QString& filePath);
+
 private:
     Ui::MainWindow *ui;
+    QStringListModel* listModel;
+    QStringList fileList;  // ファイル名をためるリスト
 };
 #endif // MAINWINDOW_H

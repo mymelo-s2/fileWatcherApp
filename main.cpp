@@ -1,23 +1,21 @@
 #include "mainwindow.h"
+#include "FolderMonitor.h"
 
 #include <QApplication>
-#include <QLocale>
-#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "LogDesplayProject_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
-    }
     MainWindow w;
     w.show();
+
+    QString watchPath = "C:/Users/xxxxx/Documents/test";
+    // 動的確保してMainWindowを親に指定し、メモリ管理を任せる
+    FolderMonitor* monitor = new FolderMonitor(watchPath, &w);
+
+    QObject::connect(monitor, &FolderMonitor::fileDetected,
+                     &w, &MainWindow::onFileDetected);
+
     return a.exec();
 }
