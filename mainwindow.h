@@ -1,21 +1,16 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
 #include <QMainWindow>
-#include <QStringListModel>
+#include <QStandardItemModel>
 
-QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
@@ -23,7 +18,7 @@ public slots:
 
 private:
     Ui::MainWindow *ui;
-    QStringListModel* listModel;
-    QStringList fileList;  // ファイル名をためるリスト
+
+    // テーブル用のモデル
+    QStandardItemModel *tableModel;
 };
-#endif // MAINWINDOW_H

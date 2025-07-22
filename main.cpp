@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    QString watchPath = "C:/Users/xxxxx/Documents/test";
+    QString watchPath = "C:/Users/mymel/Documents/test";
     // 動的確保してMainWindowを親に指定し、メモリ管理を任せる
     FolderMonitor* monitor = new FolderMonitor(watchPath, &w);
 
